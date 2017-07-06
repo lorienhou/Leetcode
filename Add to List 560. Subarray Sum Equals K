@@ -1,0 +1,21 @@
+```java
+public class Solution {
+    public int subarraySum(int[] nums, int k) {
+        if (nums.length < 1)
+            return 0;
+        int count = 0;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        map.put(0,1);
+        int preSum = 0;
+        for (int i : nums) {
+            int target = preSum + i - k;
+            if (map.get(target) != null) {
+                count += map.get(target);
+            }
+            preSum += i;
+            map.put(preSum, map.get(preSum) == null ? 1 : (map.get(preSum) + 1));
+        }
+        return count;
+    }
+}
+```
